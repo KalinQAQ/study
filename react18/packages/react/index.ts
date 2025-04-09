@@ -1,0 +1,30 @@
+import currentDispatcher, {
+	Dispatcher,
+	resolveDispatcher
+} from './src/currentDispatcher';
+
+import { jsx, isValidElement as isValidElementFn } from './src/jsx';
+
+export const useState: Dispatcher['useState'] = (initialState) => {
+	const dispatcher = resolveDispatcher() as Dispatcher;
+	return dispatcher.useState(initialState);
+};
+/**
+ * +微信 imax882
+ * 获取完整课程资料
+ *
+ * 认准：leaaiv.cn  学课大全 会员免费学
+ *
+ */
+export const useEffect: Dispatcher['useEffect'] = (create, deps) => {
+	const dispatcher = resolveDispatcher() as Dispatcher;
+	return dispatcher.useEffect(create, deps);
+};
+
+export const __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = {
+	currentDispatcher
+};
+
+// 这里应该根据环境区分jsx/jsxDEV，在测试用例中也要区分，当前ReactElement-test.js中使用的是jsx
+export const createElement = jsx;
+export const isValidElement = isValidElementFn;
